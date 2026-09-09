@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NX OpenGL Trail</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Ambient High-End Cyber Atmosphere -->
+  <div class="ambient-scene">
+    <div class="aurora aurora-1"></div>
+    <div class="aurora aurora-2"></div>
+    <div class="aurora aurora-3"></div>
+    <div class="cyber-mesh"></div>
+    <div class="light-ray"></div>
+  </div>
+
+  <!-- App Wrapper -->
+  <div class="app-viewport">
+
+    <!-- ==============================================
+         VIEW 1: ULTRA-MODERN LOGIN SCREEN
+    =============================================== -->
+    <section id="login-view" class="view-panel active">
+      <div class="login-container">
+
+        <!-- Glowing Central Emblem -->
+        <div class="emblem-group">
+          <div class="emblem-halo"></div>
+          <div class="emblem-orb">
+            <svg viewBox="0 0 70 70" class="emblem-svg" shape-rendering="geometricPrecision">
+              <defs>
+                <linearGradient id="emblemGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#00f2fe" />
+                  <stop offset="50%" stop-color="#4facfe" />
+                  <stop offset="100%" stop-color="#7928ca" />
+                </linearGradient>
+              </defs>
+              <circle cx="35" cy="35" r="32" fill="none" stroke="url(#emblemGrad)" stroke-width="1.8" stroke-dasharray="8 4" class="rotating-ring" />
+              <polygon points="35,8 60,21.5 60,48.5 35,62 10,48.5 10,21.5" fill="rgba(0, 242, 254, 0.04)" stroke="url(#emblemGrad)" stroke-width="1.5" />
+              <path d="M25 46 V24 L45 46 V24" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none" style="filter: drop-shadow(0 0 8px rgba(0, 242, 254, 0.85));" />
+            </svg>
+          </div>
+          <div class="status-chip">
+            <span class="chip-pulse"></span>
+            <span>NX KERNEL v2.4.0 • TRIAL EDITION</span>
+          </div>
+        </div>
+
+        <!-- Glassmorphic Login Card with Animated Border Beam -->
+        <div class="glass-card auth-card">
+          <div class="border-beam"></div>
+
+          <div class="auth-header">
+            <h1 class="auth-title">NX OPENGL TRAIL</h1>
+            <p class="auth-desc">High-Performance Emulator Acceleration & Virtualization Suite</p>
+          </div>
+
+          <form id="login-form" autocomplete="off">
+            <div class="input-block">
+              <div class="input-header">
+                <label for="license-key" class="input-label">
+                  <svg viewBox="0 0 24 24" class="label-svg">
+                    <path fill="currentColor" d="M7 14A2 2 0 0 1 5 12A2 2 0 0 1 7 10A2 2 0 0 1 9 12A2 2 0 0 1 7 14M12.6 10C11.8 7.7 9.6 6 7 6A6 6 0 0 0 1 12A6 6 0 0 0 7 18C9.6 18 11.8 16.3 12.6 14H16V18H20V14H23V10H12.6Z"/>
+                  </svg>
+                  <span>ACCESS LICENSE KEY</span>
+                </label>
+                <button type="button" id="btn-quick-fill" class="quick-fill-btn">Default Trial Key</button>
+              </div>
+
+              <div class="input-field-wrapper">
+                <input 
+                  type="text" 
+                  id="license-key" 
+                  class="auth-input" 
+                  value="NX-TRAIL-6767-FREE" 
+                  placeholder="Paste your license key here..." 
+                  required
+                />
+                <button type="button" id="btn-paste-key" class="input-action-btn" title="Paste from clipboard">
+                  <svg viewBox="0 0 24 24" class="btn-icon-svg">
+                    <path fill="currentColor" d="M19 3H14.82C14.4 1.84 13.3 1 12 1S9.6 1.84 9.18 3H5C3.9 3 3 3.9 3 5V19C3 20.1 3.9 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3M12 3C12.55 3 13 3.45 13 4S12.55 5 12 5 11 4.55 11 4 11.45 3 12 3M7 7H17V9H7V7M17 11H7V13H17V11M14 15H7V17H14V15Z"/>
+                  </svg>
+                  <span>PASTE</span>
+                </button>
+              </div>
+            </div>
+
+            <button type="submit" id="btn-login" class="hero-btn">
+              <div class="btn-shine"></div>
+              <div class="btn-core">
+                <svg viewBox="0 0 24 24" class="btn-icon">
+                  <path fill="currentColor" d="M10 17V14H3V10H10V7L15 12L10 17M10 2H19A2 2 0 0 1 21 4V20A2 2 0 0 1 19 22H10A2 2 0 0 1 8 20V18H10V20H19V4H10V6H8V4A2 2 0 0 1 10 2Z"/>
+                </svg>
+                <span>ENTER TRAIL DASHBOARD</span>
+              </div>
+            </button>
+          </form>
+
+          <!-- Divider -->
+          <div class="community-divider">
+            <span class="divider-text">OFFICIAL NX CHANNELS</span>
+          </div>
+
+          <!-- Social Channels 4-Grid -->
+          <div class="channels-grid">
+            <!-- Discord -->
+            <a href="https://discord.gg/rF8eNqYG23" target="_blank" rel="noopener" class="channel-card discord-theme" id="link-discord">
+              <div class="channel-icon-pill">
+                <svg viewBox="0 0 24 24" class="social-svg">
+                  <path fill="currentColor" d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
+                </svg>
+              </div>
+              <div class="channel-info">
+                <span class="channel-title">Discord</span>
+                <span class="channel-meta">Support & Community</span>
+              </div>
+            </a>
+
+            <!-- Telegram -->
+            <a href="https://t.me/NxStoreofficial" target="_blank" rel="noopener" class="channel-card telegram-theme" id="link-telegram">
+              <div class="channel-icon-pill">
+                <svg viewBox="0 0 24 24" class="social-svg">
+                  <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19c-.14.75-.42 1-.68 1.03c-.58.05-1.02-.38-1.58-.75c-.88-.58-1.38-.94-2.23-1.5c-.99-.65-.35-1.01.22-1.59c.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02c-.09.02-1.49.95-4.22 2.79c-.4.27-.76.41-1.08.4c-.36-.01-1.04-.2-1.55-.37c-.63-.2-1.12-.31-1.08-.66c.02-.18.27-.36.75-.55c2.92-1.27 4.86-2.11 5.83-2.51c2.78-1.16 3.35-1.36 3.73-1.36c.08 0 .27.02.39.12c.1.08.13.19.14.27c-.01.06.01.24 0 .37z"/>
+                </svg>
+              </div>
+              <div class="channel-info">
+                <span class="channel-title">Telegram</span>
+                <span class="channel-meta">Nx Store Official</span>
+              </div>
+            </a>
+
+            <!-- YouTube -->
+            <a href="https://www.youtube.com/@NXTIPS" target="_blank" rel="noopener" class="channel-card youtube-theme" id="link-youtube">
+              <div class="channel-icon-pill">
+                <svg viewBox="0 0 24 24" class="social-svg">
+                  <path fill="currentColor" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+              </div>
+              <div class="channel-info">
+                <span class="channel-title">YouTube</span>
+                <span class="channel-meta">@NXTIPS Tutorials</span>
+              </div>
+            </a>
+
+            <!-- TikTok -->
+            <a href="https://www.tiktok.com/@nxtips?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener" class="channel-card tiktok-theme" id="link-tiktok">
+              <div class="channel-icon-pill">
+                <svg viewBox="0 0 24 24" class="social-svg">
+                  <path fill="currentColor" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02c.08 1.53.63 3.09 1.75 4.17c1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97c-.57-.26-1.1-.59-1.62-1.01v8.43c0 1.9-.62 3.86-1.89 5.31c-1.74 2.05-4.52 3.07-7.22 2.62c-2.48-.4-4.66-2.07-5.7-4.36c-1.32-2.91-.45-6.66 2.08-8.6c1.7-1.31 3.96-1.75 6.07-1.19c.04 1.39-.01 2.78-.01 4.18c-1.05-.33-2.26-.23-3.17.43c-.87.62-1.38 1.66-1.34 2.73c.01 1.25.76 2.39 1.93 2.82c1.13.43 2.47.2 3.39-.58c.61-.51.96-1.28 1.01-2.08V.02z"/>
+                </svg>
+              </div>
+              <div class="channel-info">
+                <span class="channel-title">TikTok</span>
+                <span class="channel-meta">@nxtips Clips</span>
+              </div>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==============================================
+         VIEW 2: HIGH-END DASHBOARD
+    =============================================== -->
+    <section id="dashboard-view" class="view-panel">
+      <div class="dashboard-container">
+
+        <!-- Top Navigation Bar -->
+        <header class="glass-card main-navbar">
+          <div class="navbar-left">
+            <div class="brand-avatar">
+              <svg viewBox="0 0 24 24" class="avatar-svg">
+                <path fill="currentColor" d="M12 2L2 7L12 12L22 7L12 2M2 17L12 22L22 17L12 12L2 17Z"/>
+              </svg>
+            </div>
+            <div class="session-details">
+              <div class="session-title-line">
+                <span class="session-brand">NX OPENGL</span>
+                <span class="badge-trial-active">TRAIL ACTIVE</span>
+              </div>
+              <div class="session-token-text" id="display-key">NX-TRAIL-6767-FREE</div>
+            </div>
+          </div>
+
+          <div class="navbar-right">
+            <!-- Countdown timer -->
+            <div class="time-widget">
+              <svg viewBox="0 0 24 24" class="widget-svg">
+                <path fill="currentColor" d="M12 20C16.4 20 20 16.4 20 12S16.4 4 12 4 4 7.6 4 12 7.6 20 12 20M12 2C17.5 2 22 6.5 22 12S17.5 22 12 22 2 17.5 2 12 6.5 2 12 2M12.5 7V12.2L17 14.9L16.2 16.1L11 13V7H12.5Z"/>
+              </svg>
+              <div class="widget-body">
+                <span class="widget-caption" id="timer-caption">TRIAL TIME LEFT</span>
+                <span class="widget-time" id="trial-timer">--:--:--</span>
+              </div>
+            </div>
+
+            <!-- Sign out button -->
+            <button id="btn-logout" class="signout-btn" title="Sign out to login">
+              <svg viewBox="0 0 24 24" class="btn-svg">
+                <path fill="currentColor" d="M16 17V14H9V10H16V7L21 12L16 17M14 2C14.53 2 15.04 2.21 15.41 2.59C15.79 2.96 16 3.47 16 4V6H14V4H5V20H14V18H16V20C16 20.53 15.79 21.04 15.41 21.41C15.04 21.79 14.53 22 14 22H5C4.47 22 3.96 21.79 3.59 21.41C3.21 21.04 3 20.53 3 20V4C3 3.47 3.21 2.96 3.59 2.59C3.96 2.21 4.47 2 5 2H14Z"/>
+              </svg>
+              <span>EXIT</span>
+            </button>
+          </div>
+        </header>
+
+        <!-- System Telemetry Status Banner -->
+        <div class="telemetry-bar">
+          <div class="telemetry-item">
+            <span class="telemetry-dot dot-green"></span>
+            <span class="telemetry-label">GPU STATUS:</span>
+            <span class="telemetry-val">NVIDIA / AMD ACCEL DETECTED</span>
+          </div>
+          <div class="telemetry-item">
+            <span class="telemetry-dot dot-cyan"></span>
+            <span class="telemetry-label">RENDER API:</span>
+            <span class="telemetry-val">OpenGL 4.6 Core Profile</span>
+          </div>
+          <div class="telemetry-item">
+            <span class="telemetry-dot dot-purple"></span>
+            <span class="telemetry-label">VIRTUALIZATION:</span>
+            <span class="telemetry-val">Hardware SVM/VT-x Ready</span>
+          </div>
+        </div>
+
+        <!-- Two Main Core Action Cards -->
+        <div class="core-actions-grid">
+
+          <!-- 1. RUN OPENGL CARD -->
+          <div class="glass-card action-module opengl-module" id="card-opengl">
+            <div class="module-halo halo-cyan"></div>
+
+            <div class="module-head">
+              <div class="module-icon-badge badge-cyan">
+                <svg viewBox="0 0 24 24" class="module-svg">
+                  <path fill="currentColor" d="M11 15H6L13 1V9H18L11 23V15Z"/>
+                </svg>
+              </div>
+              <div class="module-title-wrap">
+                <div class="module-subtag">GRAPHICS ACCELERATION</div>
+                <h2 class="module-title">Run OpenGL</h2>
+                <p class="module-info">Force ultra-low latency OpenGL render context & unlock maximum FPS frame throughput.</p>
+              </div>
+            </div>
+
+            <div class="module-metrics">
+              <div class="metric-cell">
+                <span class="metric-label">STATUS</span>
+                <span class="metric-state" id="status-opengl">STANDBY</span>
+              </div>
+              <div class="metric-cell">
+                <span class="metric-label">INTEROP</span>
+                <span class="metric-state">D3D11 / wGL</span>
+              </div>
+            </div>
+
+            <!-- Progress animation bar -->
+            <div class="module-progress-wrapper" id="progress-opengl-wrap">
+              <div class="module-progress-bar bar-cyan" id="progress-opengl"></div>
+            </div>
+
+            <!-- Action Button -->
+            <button id="btn-run-opengl" class="action-trigger-btn btn-cyan">
+              <svg viewBox="0 0 24 24" class="trigger-icon">
+                <path fill="currentColor" d="M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2M10 16.5V7.5L16 12L10 16.5Z"/>
+              </svg>
+              <span class="btn-text">RUN OPENGL ENGINE</span>
+            </button>
+          </div>
+
+          <!-- 2. FIX VT CARD -->
+          <div class="glass-card action-module vt-module" id="card-vt">
+            <div class="module-halo halo-purple"></div>
+
+            <div class="module-head">
+              <div class="module-icon-badge badge-purple">
+                <svg viewBox="0 0 24 24" class="module-svg">
+                  <path fill="currentColor" d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1M12 7C13.1 7 14 7.9 14 9S13.1 11 12 11 10 10.1 10 9 10.9 7 12 7M16 15H8V13.8C8 12.47 10.67 11.8 12 11.8C13.33 11.8 16 12.47 16 13.8V15Z"/>
+                </svg>
+              </div>
+              <div class="module-title-wrap">
+                <div class="module-subtag subtag-purple">HYPERVISOR REPAIR</div>
+                <h2 class="module-title">Fix VT</h2>
+                <p class="module-info">If you encounter a VT error in the emulator after running OpenGL, run this button, then re-run OpenGL.</p>
+              </div>
+            </div>
+
+            <div class="module-metrics">
+              <div class="metric-cell">
+                <span class="metric-label">VT ENGINE</span>
+                <span class="metric-state" id="status-vt">READY</span>
+              </div>
+              <div class="metric-cell">
+                <span class="metric-label">OPTIMIZATION</span>
+                <span class="metric-state highlight-purple">AUTO-KERNEL</span>
+              </div>
+            </div>
+
+            <!-- Progress animation bar -->
+            <div class="module-progress-wrapper" id="progress-vt-wrap">
+              <div class="module-progress-bar bar-purple" id="progress-vt"></div>
+            </div>
+
+            <!-- Action Button -->
+            <button id="btn-fix-vt" class="action-trigger-btn btn-purple">
+              <svg viewBox="0 0 24 24" class="trigger-icon">
+                <path fill="currentColor" d="M22.7 19L13.6 9.9C14.5 7.6 14 4.9 12.1 3C10.1 1 7.1 0.6 4.7 1.7L9 6L6 9L1.6 4.7C0.4 7.1 0.9 10.1 2.9 12.1C4.8 14 7.5 14.5 9.8 13.6L18.9 22.7C19.3 23.1 19.9 23.1 20.3 22.7L22.6 20.4C23.1 20 23.1 19.4 22.7 19Z"/>
+              </svg>
+              <span class="btn-text">FIX VT NOW</span>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Real-time HUD Console Output -->
+        <div class="glass-card terminal-box">
+          <div class="terminal-bar">
+            <div class="terminal-title">
+              <svg viewBox="0 0 24 24" class="terminal-svg">
+                <path fill="currentColor" d="M20 4H4A2 2 0 0 0 2 6V18A2 2 0 0 0 4 20H20A2 2 0 0 0 22 18V6A2 2 0 0 0 20 4M20 18H4V8H20M7.5 17L6 15.5L8.5 13L6 10.5L7.5 9L11.5 13M12.5 17V15H17.5V17Z"/>
+              </svg>
+              <span>NX KERNEL SYSTEM CONSOLE</span>
+            </div>
+            <button id="btn-clear-log" class="clear-terminal-btn" title="Clear console output">
+              <svg viewBox="0 0 24 24" class="clear-svg">
+                <path fill="currentColor" d="M19 4H15.5L14.5 3H9.5L8.5 4H5V6H19M6 19A2 2 0 0 0 8 21H16A2 2 0 0 0 18 19V7H6V19Z"/>
+              </svg>
+              <span>CLEAR LOGS</span>
+            </button>
+          </div>
+          <div class="terminal-stream" id="terminal-body">
+            <div class="stream-line sys"><span class="stream-tag">[SYSTEM]</span> NX OpenGL Trail engine initialized and ready.</div>
+            <div class="stream-line info"><span class="stream-tag">[STATUS]</span> Ready to execute: Run OpenGL or Fix VT.</div>
+          </div>
+        </div>
+
+        <!-- Trail Edition Notice & Upgrade -->
+        <div class="glass-card promo-banner">
+          <div class="promo-left">
+            <div class="promo-badge">
+              <svg viewBox="0 0 24 24" class="crown-svg">
+                <path fill="currentColor" d="M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5M19 19C19 19.6 18.6 20 18 20H6C5.4 20 5 19.6 5 19V18H19V19Z"/>
+              </svg>
+            </div>
+            <div class="promo-text">
+              <h3 class="promo-title">RUNNING ON NX TRAIL VERSION</h3>
+              <p class="promo-desc">Upgrade to Lifetime Full Version for unrestricted 240+ FPS, background auto-patching & VIP support.</p>
+            </div>
+          </div>
+          <a href="https://discord.gg/rF8eNqYG23" target="_blank" rel="noopener" class="promo-btn">
+            <span>GET FULL VERSION</span>
+            <svg viewBox="0 0 24 24" class="arrow-svg">
+              <path fill="currentColor" d="M4 11V13H16L10.5 18.5L11.92 19.92L19.84 12L11.92 4.08L10.5 5.5L16 11H4Z"/>
+            </svg>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Toast Notification Deck -->
+  <div id="toast-container" class="toast-deck"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
