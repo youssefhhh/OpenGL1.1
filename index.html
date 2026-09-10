@@ -8,6 +8,18 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
+  <style>
+    *::-webkit-scrollbar, ::-webkit-scrollbar, *::-webkit-scrollbar-thumb, ::-webkit-scrollbar-thumb, *::-webkit-scrollbar-track, ::-webkit-scrollbar-track {
+      display: none !important;
+      width: 0px !important;
+      height: 0px !important;
+      background: transparent !important;
+      opacity: 0 !important;
+      visibility: hidden !important;
+    }
+    * { scrollbar-width: none !important; -ms-overflow-style: none !important; }
+    html, body { scrollbar-width: none !important; -ms-overflow-style: none !important; overflow-x: hidden !important; }
+  </style>
 </head>
 <body>
   <!-- Ambient High-End Cyber Atmosphere -->
@@ -65,11 +77,10 @@
               <div class="input-header">
                 <label for="license-key" class="input-label">
                   <svg viewBox="0 0 24 24" class="label-svg">
-                    <path fill="currentColor" d="M7 14A2 2 0 0 1 5 12A2 2 0 0 1 7 10A2 2 0 0 1 9 12A2 2 0 0 1 7 14M12.6 10C11.8 7.7 9.6 6 7 6A6 6 0 0 0 1 12A6 6 0 0 0 7 18C9.6 18 11.8 16.3 12.6 14H16V18H20V14H23V10H12.6Z"/>
+                    <path fill="currentColor" d="M7 14A2 2 0 0 1 5 12A2 2 0 0 1 7 10A2 2 0 0 1 7 14M12.6 10C11.8 7.7 9.6 6 7 6A6 6 0 0 0 1 12A6 6 0 0 0 7 18C9.6 18 11.8 16.3 12.6 14H16V18H20V14H23V10H12.6Z"/>
                   </svg>
                   <span>ACCESS LICENSE KEY</span>
                 </label>
-                <button type="button" id="btn-quick-fill" class="quick-fill-btn">Default Trial Key</button>
               </div>
 
               <div class="input-field-wrapper">
@@ -77,7 +88,7 @@
                   type="text" 
                   id="license-key" 
                   class="auth-input" 
-                  value="NX-TRAIL-6767-FREE" 
+                  value="" 
                   placeholder="Paste your license key here..." 
                   required
                 />
@@ -184,7 +195,7 @@
                 <span class="session-brand">NX OPENGL</span>
                 <span class="badge-trial-active">TRAIL ACTIVE</span>
               </div>
-              <div class="session-token-text" id="display-key">NX-TRAIL-6767-FREE</div>
+              <div class="session-token-text" id="display-key">---</div>
             </div>
           </div>
 

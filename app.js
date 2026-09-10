@@ -221,8 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Quick fill demo key
   if (btnQuickFill) {
     btnQuickFill.addEventListener('click', () => {
-      licenseInput.value = 'NX-TRAIL-6767-FREE';
-      showToast('Loaded Default Trial Key', 'info');
+      licenseInput.value = '';
     });
   }
 
@@ -239,8 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         }
       } catch (err) {}
-      licenseInput.value = 'NX-TRAIL-6767-FREE';
-      showToast('Default Trial Key Loaded', 'info');
+      showToast('Clipboard is empty', 'warn');
     });
   }
 
@@ -479,4 +477,22 @@ document.addEventListener('DOMContentLoaded', () => {
       DesktopBridge.send('open_external_link', { platform, url });
     });
   });
+
+  // Security Lockdown: Block context menu and devtools shortcut inspection
+  window.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+    return false;
+  }, { capture: true });
+
+  window.addEventListener('keydown', (e) => {
+    if (
+      e.key === 'F12' ||
+      (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) ||
+      (e.ctrlKey && (e.key === 'U' || e.key === 'u' || e.key === 'S' || e.key === 's'))
+    ) {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    }
+  }, { capture: true });
 });

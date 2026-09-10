@@ -39,6 +39,26 @@ html {
   text-rendering: optimizeLegibility;
   -webkit-text-size-adjust: 100%;
   image-rendering: -webkit-optimize-contrast;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+  overflow-x: hidden !important;
+}
+
+/* ================= GLOBAL SCROLLBAR REMOVAL ================= */
+*::-webkit-scrollbar,
+::-webkit-scrollbar,
+*::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-track,
+::-webkit-scrollbar-track,
+*::-webkit-scrollbar-corner,
+::-webkit-scrollbar-corner {
+  display: none !important;
+  width: 0px !important;
+  height: 0px !important;
+  background: transparent !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
 }
 
 * {
@@ -48,6 +68,8 @@ html {
   user-select: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
 }
 
 svg {
@@ -64,6 +86,8 @@ body {
   align-items: center;
   justify-content: center;
   overflow-x: hidden;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
   position: relative;
   padding: 30px 18px;
   text-rendering: optimizeLegibility;
