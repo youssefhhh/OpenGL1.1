@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NX OpenGL Trail</title>
+  <title>NX OpenGL Pro</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
@@ -59,7 +59,7 @@
           </div>
           <div class="status-chip">
             <span class="chip-pulse"></span>
-            <span>NX KERNEL v2.4.0 • TRIAL EDITION</span>
+            <span>NX KERNEL v2.4.0 • PRO EDITION</span>
           </div>
         </div>
 
@@ -68,7 +68,7 @@
           <div class="border-beam"></div>
 
           <div class="auth-header">
-            <h1 class="auth-title">NX OPENGL TRAIL</h1>
+            <h1 class="auth-title">NX OPENGL PRO</h1>
             <p class="auth-desc">High-Performance Emulator Acceleration & Virtualization Suite</p>
           </div>
 
@@ -89,8 +89,7 @@
                   id="license-key" 
                   class="auth-input" 
                   value="" 
-                  placeholder="Paste your license key here..." 
-                  required
+                  placeholder="Enter your license key..." 
                 />
                 <button type="button" id="btn-paste-key" class="input-action-btn" title="Paste from clipboard">
                   <svg viewBox="0 0 24 24" class="btn-icon-svg">
@@ -107,7 +106,7 @@
                 <svg viewBox="0 0 24 24" class="btn-icon">
                   <path fill="currentColor" d="M10 17V14H3V10H10V7L15 12L10 17M10 2H19A2 2 0 0 1 21 4V20A2 2 0 0 1 19 22H10A2 2 0 0 1 8 20V18H10V20H19V4H10V6H8V4A2 2 0 0 1 10 2Z"/>
                 </svg>
-                <span>ENTER TRAIL DASHBOARD</span>
+                <span>ENTER DASHBOARD</span>
               </div>
             </button>
           </form>
@@ -180,196 +179,349 @@
          VIEW 2: HIGH-END DASHBOARD
     =============================================== -->
     <section id="dashboard-view" class="view-panel">
-      <div class="dashboard-container">
+      <div class="app-layout">
 
-        <!-- Top Navigation Bar -->
-        <header class="glass-card main-navbar">
-          <div class="navbar-left">
-            <div class="brand-avatar">
-              <svg viewBox="0 0 24 24" class="avatar-svg">
-                <path fill="currentColor" d="M12 2L2 7L12 12L22 7L12 2M2 17L12 22L22 17L12 12L2 17Z"/>
-              </svg>
-            </div>
-            <div class="session-details">
-              <div class="session-title-line">
-                <span class="session-brand">NX OPENGL</span>
-                <span class="badge-trial-active">TRAIL ACTIVE</span>
-              </div>
-              <div class="session-token-text" id="display-key">---</div>
+        <!-- ==============================================
+             LEFT SIDEBAR (Matches User's Screenshot Exactly)
+        =============================================== -->
+        <aside class="app-sidebar">
+          <div class="sidebar-brand">
+            <div class="nx-logo-badge">
+              <span class="nx-logo-text">NX</span>
             </div>
           </div>
 
-          <div class="navbar-right">
-            <!-- Countdown timer -->
-            <div class="time-widget">
-              <svg viewBox="0 0 24 24" class="widget-svg">
-                <path fill="currentColor" d="M12 20C16.4 20 20 16.4 20 12S16.4 4 12 4 4 7.6 4 12 7.6 20 12 20M12 2C17.5 2 22 6.5 22 12S17.5 22 12 22 2 17.5 2 12 6.5 2 12 2M12.5 7V12.2L17 14.9L16.2 16.1L11 13V7H12.5Z"/>
+          <nav class="sidebar-nav">
+            <!-- 1. Home -->
+            <button class="nav-item active" data-tab="home" type="button">
+              <span class="nav-active-pill"></span>
+              <svg viewBox="0 0 24 24" class="nav-icon" fill="currentColor">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
               </svg>
-              <div class="widget-body">
-                <span class="widget-caption" id="timer-caption">TRIAL TIME LEFT</span>
-                <span class="widget-time" id="trial-timer">--:--:--</span>
-              </div>
-            </div>
-
-            <!-- Sign out button -->
-            <button id="btn-logout" class="signout-btn" title="Sign out to login">
-              <svg viewBox="0 0 24 24" class="btn-svg">
-                <path fill="currentColor" d="M16 17V14H9V10H16V7L21 12L16 17M14 2C14.53 2 15.04 2.21 15.41 2.59C15.79 2.96 16 3.47 16 4V6H14V4H5V20H14V18H16V20C16 20.53 15.79 21.04 15.41 21.41C15.04 21.79 14.53 22 14 22H5C4.47 22 3.96 21.79 3.59 21.41C3.21 21.04 3 20.53 3 20V4C3 3.47 3.21 2.96 3.59 2.59C3.96 2.21 4.47 2 5 2H14Z"/>
-              </svg>
-              <span>EXIT</span>
+              <span class="nav-label">Home</span>
             </button>
-          </div>
-        </header>
 
-        <!-- System Telemetry Status Banner -->
-        <div class="telemetry-bar">
-          <div class="telemetry-item">
-            <span class="telemetry-dot dot-green"></span>
-            <span class="telemetry-label">GPU STATUS:</span>
-            <span class="telemetry-val">NVIDIA / AMD ACCEL DETECTED</span>
-          </div>
-          <div class="telemetry-item">
-            <span class="telemetry-dot dot-cyan"></span>
-            <span class="telemetry-label">RENDER API:</span>
-            <span class="telemetry-val">OpenGL 4.6 Core Profile</span>
-          </div>
-          <div class="telemetry-item">
-            <span class="telemetry-dot dot-purple"></span>
-            <span class="telemetry-label">VIRTUALIZATION:</span>
-            <span class="telemetry-val">Hardware SVM/VT-x Ready</span>
-          </div>
-        </div>
+            <!-- 2. GameLoop (GFX Tool & Supervisor) -->
+            <button class="nav-item" data-tab="gameloop" type="button">
+              <span class="nav-active-pill"></span>
+              <svg viewBox="0 0 24 24" class="nav-icon" fill="currentColor">
+                <path d="M17.5 12A1.5 1.5 0 0 1 16 10.5A1.5 1.5 0 0 1 17.5 9A1.5 1.5 0 0 1 19 10.5A1.5 1.5 0 0 1 17.5 12M14.5 9A1.5 1.5 0 0 1 13 7.5A1.5 1.5 0 0 1 14.5 6A1.5 1.5 0 0 1 16 7.5A1.5 1.5 0 0 1 14.5 9M6 10V8H8V10H10V12H8V14H6V12H4V10H6M18 5H6C3.79 5 2 6.79 2 9V15C2 17.21 3.79 19 6 19H18C20.21 19 22 17.21 22 15V9C22 6.79 20.21 5 18 5Z"/>
+              </svg>
+              <span class="nav-label">GameLoop</span>
+            </button>
+          </nav>
+        </aside>
 
-        <!-- Two Main Core Action Cards -->
-        <div class="core-actions-grid">
-
-          <!-- 1. RUN OPENGL CARD -->
-          <div class="glass-card action-module opengl-module" id="card-opengl">
-            <div class="module-halo halo-cyan"></div>
-
-            <div class="module-head">
-              <div class="module-icon-badge badge-cyan">
-                <svg viewBox="0 0 24 24" class="module-svg">
-                  <path fill="currentColor" d="M11 15H6L13 1V9H18L11 23V15Z"/>
+        <!-- Right Main Workspace -->
+        <div class="app-workspace">
+          
+          <!-- Top Navigation Bar -->
+          <header class="glass-card main-navbar">
+            <div class="navbar-left">
+              <div class="brand-avatar">
+                <svg viewBox="0 0 24 24" class="avatar-svg">
+                  <path fill="currentColor" d="M12 2L2 7L12 12L22 7L12 2M2 17L12 22L22 17L12 12L2 17Z"/>
                 </svg>
               </div>
-              <div class="module-title-wrap">
-                <div class="module-subtag">GRAPHICS ACCELERATION</div>
-                <h2 class="module-title">Run OpenGL</h2>
-                <p class="module-info">Force ultra-low latency OpenGL render context & unlock maximum FPS frame throughput.</p>
+              <div class="session-details">
+                <div class="session-title-line">
+                  <span class="session-brand">NX OPENGL PRO</span>
+                  <span class="badge-trial-active" style="background: rgba(0, 242, 254, 0.15); border-color: rgba(0, 242, 254, 0.4); color: #00f2fe;">PREMIUM ACTIVE</span>
+                </div>
+                <div class="session-token-text" id="display-key">---</div>
               </div>
             </div>
 
-            <div class="module-metrics">
-              <div class="metric-cell">
-                <span class="metric-label">STATUS</span>
-                <span class="metric-state" id="status-opengl">STANDBY</span>
-              </div>
-              <div class="metric-cell">
-                <span class="metric-label">INTEROP</span>
-                <span class="metric-state">D3D11 / wGL</span>
-              </div>
-            </div>
-
-            <!-- Progress animation bar -->
-            <div class="module-progress-wrapper" id="progress-opengl-wrap">
-              <div class="module-progress-bar bar-cyan" id="progress-opengl"></div>
-            </div>
-
-            <!-- Action Button -->
-            <button id="btn-run-opengl" class="action-trigger-btn btn-cyan">
-              <svg viewBox="0 0 24 24" class="trigger-icon">
-                <path fill="currentColor" d="M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2M10 16.5V7.5L16 12L10 16.5Z"/>
-              </svg>
-              <span class="btn-text">RUN OPENGL ENGINE</span>
-            </button>
-          </div>
-
-          <!-- 2. FIX VT CARD -->
-          <div class="glass-card action-module vt-module" id="card-vt">
-            <div class="module-halo halo-purple"></div>
-
-            <div class="module-head">
-              <div class="module-icon-badge badge-purple">
-                <svg viewBox="0 0 24 24" class="module-svg">
-                  <path fill="currentColor" d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1M12 7C13.1 7 14 7.9 14 9S13.1 11 12 11 10 10.1 10 9 10.9 7 12 7M16 15H8V13.8C8 12.47 10.67 11.8 12 11.8C13.33 11.8 16 12.47 16 13.8V15Z"/>
+            <div class="navbar-right">
+              <!-- License status widget -->
+              <div class="time-widget">
+                <svg viewBox="0 0 24 24" class="widget-svg">
+                  <path fill="currentColor" d="M12 20C16.4 20 20 16.4 20 12S16.4 4 12 4 4 7.6 4 12 7.6 20 12 20M12 2C17.5 2 22 6.5 22 12S17.5 22 12 22 2 17.5 2 12 6.5 2 12 2M12.5 7V12.2L17 14.9L16.2 16.1L11 13V7H12.5Z"/>
                 </svg>
+                <div class="widget-body">
+                  <span class="widget-caption" id="timer-caption">LICENSE STATUS</span>
+                  <span class="widget-time" id="trial-timer">LIFETIME</span>
+                </div>
               </div>
-              <div class="module-title-wrap">
-                <div class="module-subtag subtag-purple">HYPERVISOR REPAIR</div>
-                <h2 class="module-title">Fix VT</h2>
-                <p class="module-info">If you encounter a VT error in the emulator after running OpenGL, run this button, then re-run OpenGL.</p>
+
+              <!-- Sign out button -->
+              <button id="btn-logout" class="signout-btn" title="Sign out to login">
+                <svg viewBox="0 0 24 24" class="btn-svg">
+                  <path fill="currentColor" d="M16 17V14H9V10H16V7L21 12L16 17M14 2C14.53 2 15.04 2.21 15.41 2.59C15.79 2.96 16 3.47 16 4V6H14V4H5V20H14V18H16V20C16 20.53 15.79 21.04 15.41 21.41C15.04 21.79 14.53 22 14 22H5C4.47 22 3.96 21.79 3.59 21.41C3.21 21.04 3 20.53 3 20V4C3 3.47 3.21 2.96 3.59 2.59C3.96 2.21 4.47 2 5 2H14Z"/>
+                </svg>
+                <span>EXIT</span>
+              </button>
+            </div>
+          </header>
+
+          <!-- TAB 1: HOME (Active) -->
+          <div class="tab-pane active" id="tab-pane-home">
+            <!-- System Telemetry Status Banner -->
+            <div class="telemetry-bar">
+              <div class="telemetry-item">
+                <span class="telemetry-dot dot-green"></span>
+                <span class="telemetry-label">GPU STATUS:</span>
+                <span class="telemetry-val">NVIDIA / AMD ACCEL DETECTED</span>
+              </div>
+              <div class="telemetry-item">
+                <span class="telemetry-dot dot-cyan"></span>
+                <span class="telemetry-label">RENDER API:</span>
+                <span class="telemetry-val">OpenGL 4.6 Core Profile</span>
+              </div>
+              <div class="telemetry-item">
+                <span class="telemetry-dot dot-purple"></span>
+                <span class="telemetry-label">VIRTUALIZATION:</span>
+                <span class="telemetry-val">Hardware SVM/VT-x Ready</span>
               </div>
             </div>
 
-            <div class="module-metrics">
-              <div class="metric-cell">
-                <span class="metric-label">VT ENGINE</span>
-                <span class="metric-state" id="status-vt">READY</span>
+            <!-- Two Main Core Action Cards -->
+            <div class="core-actions-grid">
+              <!-- 1. RUN OPENGL CARD -->
+              <div class="glass-card action-module opengl-module" id="card-opengl">
+                <div class="module-halo halo-cyan"></div>
+                <div class="module-head">
+                  <div class="module-icon-badge badge-cyan">
+                    <svg viewBox="0 0 24 24" class="module-svg">
+                      <path fill="currentColor" d="M11 15H6L13 1V9H18L11 23V15Z"/>
+                    </svg>
+                  </div>
+                  <div class="module-title-wrap">
+                    <div class="module-subtag">GRAPHICS ACCELERATION</div>
+                    <h2 class="module-title">Run OpenGL</h2>
+                    <p class="module-info">Force ultra-low latency OpenGL render context & unlock maximum FPS frame throughput.</p>
+                  </div>
+                </div>
+
+                <div class="module-metrics">
+                  <div class="metric-cell">
+                    <span class="metric-label">STATUS</span>
+                    <span class="metric-state" id="status-opengl">STANDBY</span>
+                  </div>
+                  <div class="metric-cell">
+                    <span class="metric-label">INTEROP</span>
+                    <span class="metric-state">D3D11 / wGL</span>
+                  </div>
+                </div>
+
+                <div class="module-progress-wrapper" id="progress-opengl-wrap">
+                  <div class="module-progress-bar bar-cyan" id="progress-opengl"></div>
+                </div>
+
+                <button id="btn-run-opengl" class="action-trigger-btn btn-cyan" type="button">
+                  <svg viewBox="0 0 24 24" class="trigger-icon">
+                    <path fill="currentColor" d="M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2M10 16.5V7.5L16 12L10 16.5Z"/>
+                  </svg>
+                  <span class="btn-text">RUN OPENGL ENGINE</span>
+                </button>
               </div>
-              <div class="metric-cell">
-                <span class="metric-label">OPTIMIZATION</span>
-                <span class="metric-state highlight-purple">AUTO-KERNEL</span>
+
+              <!-- 2. FIX VT CARD -->
+              <div class="glass-card action-module vt-module" id="card-vt">
+                <div class="module-halo halo-purple"></div>
+                <div class="module-head">
+                  <div class="module-icon-badge badge-purple">
+                    <svg viewBox="0 0 24 24" class="module-svg">
+                      <path fill="currentColor" d="M12 1L3 5V11C3 16.55 6.84 21.74 12 23C17.16 21.74 21 16.55 21 11V5L12 1M12 7C13.1 7 14 7.9 14 9S13.1 11 12 11 10 10.1 10 9 10.9 7 12 7M16 15H8V13.8C8 12.47 10.67 11.8 12 11.8C13.33 11.8 16 12.47 16 13.8V15Z"/>
+                    </svg>
+                  </div>
+                  <div class="module-title-wrap">
+                    <div class="module-subtag subtag-purple">HYPERVISOR REPAIR</div>
+                    <h2 class="module-title">Fix VT</h2>
+                    <p class="module-info">If you encounter a VT error in the emulator after running OpenGL, run this button, then re-run OpenGL.</p>
+                  </div>
+                </div>
+
+                <div class="module-metrics">
+                  <div class="metric-cell">
+                    <span class="metric-label">VT ENGINE</span>
+                    <span class="metric-state" id="status-vt">READY</span>
+                  </div>
+                  <div class="metric-cell">
+                    <span class="metric-label">OPTIMIZATION</span>
+                    <span class="metric-state highlight-purple">AUTO-KERNEL</span>
+                  </div>
+                </div>
+
+                <div class="module-progress-wrapper" id="progress-vt-wrap">
+                  <div class="module-progress-bar bar-purple" id="progress-vt"></div>
+                </div>
+
+                <button id="btn-fix-vt" class="action-trigger-btn btn-purple" type="button">
+                  <svg viewBox="0 0 24 24" class="trigger-icon">
+                    <path fill="currentColor" d="M22.7 19L13.6 9.9C14.5 7.6 14 4.9 12.1 3C10.1 1 7.1 0.6 4.7 1.7L9 6L6 9L1.6 4.7C0.4 7.1 0.9 10.1 2.9 12.1C4.8 14 7.5 14.5 9.8 13.6L18.9 22.7C19.3 23.1 19.9 23.1 20.3 22.7L22.6 20.4C23.1 20 23.1 19.4 22.7 19Z"/>
+                  </svg>
+                  <span class="btn-text">FIX VT NOW</span>
+                </button>
               </div>
             </div>
 
-            <!-- Progress animation bar -->
-            <div class="module-progress-wrapper" id="progress-vt-wrap">
-              <div class="module-progress-bar bar-purple" id="progress-vt"></div>
+            <!-- Terminal Console Output -->
+            <div class="glass-card terminal-box">
+              <div class="terminal-bar">
+                <div class="terminal-title">
+                  <svg viewBox="0 0 24 24" class="terminal-svg">
+                    <path fill="currentColor" d="M20 4H4A2 2 0 0 0 2 6V18A2 2 0 0 0 4 20H20A2 2 0 0 0 22 18V6A2 2 0 0 0 20 4M20 18H4V8H20M7.5 17L6 15.5L8.5 13L6 10.5L7.5 9L11.5 13M12.5 17V15H17.5V17Z"/>
+                  </svg>
+                  <span>NX KERNEL SYSTEM CONSOLE</span>
+                </div>
+                <button id="btn-clear-log" class="clear-terminal-btn" title="Clear console output" type="button">
+                  <svg viewBox="0 0 24 24" class="clear-svg">
+                    <path fill="currentColor" d="M19 4H15.5L14.5 3H9.5L8.5 4H5V6H19M6 19A2 2 0 0 0 8 21H16A2 2 0 0 0 18 19V7H6V19Z"/>
+                  </svg>
+                  <span>CLEAR LOGS</span>
+                </button>
+              </div>
+              <div class="terminal-stream" id="terminal-body">
+                <div class="stream-line sys"><span class="stream-tag">[SYSTEM]</span> NX OpenGL Pro engine initialized and ready.</div>
+                <div class="stream-line info"><span class="stream-tag">[STATUS]</span> Ready to execute: Run OpenGL or Fix VT.</div>
+              </div>
             </div>
-
-            <!-- Action Button -->
-            <button id="btn-fix-vt" class="action-trigger-btn btn-purple">
-              <svg viewBox="0 0 24 24" class="trigger-icon">
-                <path fill="currentColor" d="M22.7 19L13.6 9.9C14.5 7.6 14 4.9 12.1 3C10.1 1 7.1 0.6 4.7 1.7L9 6L6 9L1.6 4.7C0.4 7.1 0.9 10.1 2.9 12.1C4.8 14 7.5 14.5 9.8 13.6L18.9 22.7C19.3 23.1 19.9 23.1 20.3 22.7L22.6 20.4C23.1 20 23.1 19.4 22.7 19Z"/>
-              </svg>
-              <span class="btn-text">FIX VT NOW</span>
-            </button>
           </div>
 
-        </div>
+          <!-- TAB 2: GAMELOOP (COMPLETE NXVIP GFX SYSTEM) -->
+          <div class="tab-pane" id="tab-pane-gameloop">
+            <div class="gfx-grid">
+              
+              <!-- Left Column: Graphics Settings (Directly from NXVIP) -->
+              <div class="glass-card gfx-settings-card">
+                <div class="gfx-header-title">
+                  <svg viewBox="0 0 24 24" class="gfx-title-svg" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
+                  </svg>
+                  <span>GRAPHICS SETTINGS (GFX ENGINE)</span>
+                </div>
 
-        <!-- Real-time HUD Console Output -->
-        <div class="glass-card terminal-box">
-          <div class="terminal-bar">
-            <div class="terminal-title">
-              <svg viewBox="0 0 24 24" class="terminal-svg">
-                <path fill="currentColor" d="M20 4H4A2 2 0 0 0 2 6V18A2 2 0 0 0 4 20H20A2 2 0 0 0 22 18V6A2 2 0 0 0 20 4M20 18H4V8H20M7.5 17L6 15.5L8.5 13L6 10.5L7.5 9L11.5 13M12.5 17V15H17.5V17Z"/>
-              </svg>
-              <span>NX KERNEL SYSTEM CONSOLE</span>
-            </div>
-            <button id="btn-clear-log" class="clear-terminal-btn" title="Clear console output">
-              <svg viewBox="0 0 24 24" class="clear-svg">
-                <path fill="currentColor" d="M19 4H15.5L14.5 3H9.5L8.5 4H5V6H19M6 19A2 2 0 0 0 8 21H16A2 2 0 0 0 18 19V7H6V19Z"/>
-              </svg>
-              <span>CLEAR LOGS</span>
-            </button>
-          </div>
-          <div class="terminal-stream" id="terminal-body">
-            <div class="stream-line sys"><span class="stream-tag">[SYSTEM]</span> NX OpenGL Trail engine initialized and ready.</div>
-            <div class="stream-line info"><span class="stream-tag">[STATUS]</span> Ready to execute: Run OpenGL or Fix VT.</div>
-          </div>
-        </div>
+                <!-- 1. Game Version Selector -->
+                <div class="gfx-section-block">
+                  <div class="gfx-section-head">
+                    <span class="section-label">Game Version</span>
+                  </div>
+                  <div class="gfx-options-wrap">
+                    <div class="btn-group" id="grp-game-version">
+                      <button class="option-btn selected" data-grp="0" data-val="global" type="button">Global</button>
+                      <button class="option-btn" data-grp="0" data-val="korea" type="button">Korea</button>
+                      <button class="option-btn" data-grp="0" data-val="vietnam" type="button">Vietnam</button>
+                      <button class="option-btn" data-grp="0" data-val="taiwan" type="button">Taiwan</button>
+                      <button class="option-btn" data-grp="0" data-val="india" type="button">India</button>
+                    </div>
+                  </div>
+                </div>
 
-        <!-- Trail Edition Notice & Upgrade -->
-        <div class="glass-card promo-banner">
-          <div class="promo-left">
-            <div class="promo-badge">
-              <svg viewBox="0 0 24 24" class="crown-svg">
-                <path fill="currentColor" d="M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5M19 19C19 19.6 18.6 20 18 20H6C5.4 20 5 19.6 5 19V18H19V19Z"/>
-              </svg>
-            </div>
-            <div class="promo-text">
-              <h3 class="promo-title">RUNNING ON NX TRAIL VERSION</h3>
-              <p class="promo-desc">Upgrade to Lifetime Full Version for unrestricted 240+ FPS, background auto-patching & VIP support.</p>
+                <!-- 2. Graphics Quality -->
+                <div class="gfx-section-block">
+                  <div class="gfx-section-head">
+                    <span class="section-label">Graphics Quality</span>
+                  </div>
+                  <div class="gfx-options-wrap">
+                    <div class="btn-group" id="grp-gfx-quality">
+                      <button class="option-btn" data-grp="1" data-val="supersmooth" type="button">Super Smooth <span class="beta-badge">BETA</span></button>
+                      <button class="option-btn selected" data-grp="1" data-val="smooth" type="button">Smooth</button>
+                      <button class="option-btn" data-grp="1" data-val="balanced" type="button">Balanced</button>
+                      <button class="option-btn" data-grp="1" data-val="hd" type="button">HD</button>
+                      <button class="option-btn" data-grp="1" data-val="hdr" type="button">HDR</button>
+                      <button class="option-btn" data-grp="1" data-val="ultrahd" type="button">Ultra HD</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 3. Frame Rate (FPS) -->
+                <div class="gfx-section-block">
+                  <div class="gfx-section-head">
+                    <span class="section-label">Frame Rate (FPS)</span>
+                  </div>
+                  <div class="gfx-options-wrap">
+                    <div class="btn-group" id="grp-fps">
+                      <button class="option-btn" data-grp="2" data-val="30" type="button">30 FPS</button>
+                      <button class="option-btn" data-grp="2" data-val="40" type="button">40 FPS</button>
+                      <button class="option-btn" data-grp="2" data-val="60" type="button">60 FPS</button>
+                      <button class="option-btn" data-grp="2" data-val="90" type="button">90 FPS</button>
+                      <button class="option-btn selected" data-grp="2" data-val="120" type="button">120 FPS</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 4. Color Style -->
+                <div class="gfx-section-block">
+                  <div class="gfx-section-head">
+                    <span class="section-label">Color Style</span>
+                  </div>
+                  <div class="gfx-options-wrap">
+                    <div class="btn-group" id="grp-style">
+                      <button class="option-btn selected" data-grp="3" data-val="classic" type="button">Classic</button>
+                      <button class="option-btn" data-grp="3" data-val="colorful" type="button">Colorful</button>
+                      <button class="option-btn" data-grp="3" data-val="realistic" type="button">Realistic</button>
+                      <button class="option-btn" data-grp="3" data-val="soft" type="button">Soft</button>
+                      <button class="option-btn" data-grp="3" data-val="movie" type="button">Movie</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 5. Shadows -->
+                <div class="gfx-section-block">
+                  <div class="gfx-section-head">
+                    <span class="section-label">Shadows</span>
+                  </div>
+                  <div class="gfx-options-wrap">
+                    <div class="btn-group" id="grp-shadows">
+                      <button class="option-btn selected" data-grp="4" data-val="disable" type="button">Disable Shadows</button>
+                      <button class="option-btn" data-grp="4" data-val="enable" type="button">Enable Shadows</button>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Right Column: Process Connections and Apply Actions -->
+              <div class="action-btn-card">
+                <div class="glass-card gfx-actions-panel">
+                  <div class="action-panel-title">CONNECT &amp; APPLY</div>
+                  <div class="gfx-action-buttons">
+                    <button id="btn-connect-gameloop" class="btn-connect" type="button">
+                      <svg viewBox="0 0 24 24" class="btn-sm-icon" fill="currentColor">
+                        <path d="M8 5.14V19.14L19 12.14L8 5.14Z"/>
+                      </svg>
+                      <span id="txt-connect-gl">Start GameLoop</span>
+                    </button>
+                    <button id="btn-apply-gfx" class="btn-apply" type="button">
+                      <svg viewBox="0 0 24 24" class="btn-sm-icon" fill="currentColor">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                      </svg>
+                      <span>Apply GFX</span>
+                    </button>
+                    <button id="btn-kill-emulator" class="btn-kill-emulator" type="button">
+                      <svg viewBox="0 0 24 24" class="btn-sm-icon" fill="currentColor">
+                        <path d="M12 2C17.5 2 22 6.5 22 12C22 17.5 17.5 22 12 22C6.5 22 2 17.5 2 12C2 6.5 6.5 2 12 2M12 4C7.6 4 4 7.6 4 12C4 16.4 7.6 20 12 20C16.4 20 20 16.4 20 12C20 7.6 16.4 4 12 4M15.5 7.1L16.9 8.5L13.4 12L16.9 15.5L15.5 16.9L12 13.4L8.5 16.9L7.1 15.5L10.6 12L7.1 8.5L8.5 7.1L12 10.6L15.5 7.1Z"/>
+                      </svg>
+                      <span>Kill Emulator</span>
+                    </button>
+                  </div>
+
+                  <div class="status-box">
+                    <span class="status-label">Connection Status</span>
+                    <span id="sys-status-text" class="status-val">Standby</span>
+                  </div>
+                </div>
+
+                <!-- Live Activity Log Terminal Panel -->
+                <div class="glass-card terminal-log-card">
+                  <div class="terminal-header">
+                    <span>ACTIVITY LOG</span>
+                    <span class="live-feed-badge"><span class="pulse-dot-green"></span>LIVE</span>
+                  </div>
+                  <div class="terminal-log" id="shell-log">
+                    <div class="log-entry">
+                      <span class="log-prefix">[SYS] &gt;</span>
+                      <span class="log-txt">Ready for GFX Injection.</span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
             </div>
           </div>
-          <a href="https://discord.gg/rF8eNqYG23" target="_blank" rel="noopener" class="promo-btn">
-            <span>GET FULL VERSION</span>
-            <svg viewBox="0 0 24 24" class="arrow-svg">
-              <path fill="currentColor" d="M4 11V13H16L10.5 18.5L11.92 19.92L19.84 12L11.92 4.08L10.5 5.5L16 11H4Z"/>
-            </svg>
-          </a>
+
         </div>
 
       </div>
@@ -381,5 +533,60 @@
   <div id="toast-container" class="toast-deck"></div>
 
   <script src="app.js"></script>
+  <script>
+    (function() {
+      function syncGfxButtons(quality, fps, style, shadows, pkg) {
+        function pick(grpId, val) {
+          if (!val) return;
+          var grp = document.getElementById(grpId);
+          if (!grp) return;
+          var btn = grp.querySelector('.option-btn[data-val="' + val + '"]');
+          if (btn) {
+            grp.querySelectorAll('.option-btn').forEach(function(b) {
+              b.classList.remove('selected', 'synced-flash');
+            });
+            btn.classList.add('selected', 'synced-flash');
+            setTimeout(function() { btn.classList.remove('synced-flash'); }, 1500);
+          }
+        }
+        var pkgMap = {
+          'com.tencent.ig': 'global',
+          'com.pubg.krmobile': 'korea',
+          'com.vng.pubgmobile': 'vietnam',
+          'com.rekoo.pubgm': 'taiwan',
+          'com.pubg.imobile': 'india'
+        };
+        if (pkg && pkgMap[pkg]) {
+          pick('grp-game-version', pkgMap[pkg]);
+          try { localStorage.setItem('nx_gfx_version', pkgMap[pkg]); } catch(e){}
+        }
+        pick('grp-gfx-quality', quality);
+        pick('grp-fps', fps);
+        pick('grp-style', style);
+        pick('grp-shadows', shadows);
+
+        try {
+          if (quality) localStorage.setItem('nx_gfx_quality', quality);
+          if (fps) localStorage.setItem('nx_gfx_fps', fps);
+          if (style) localStorage.setItem('nx_gfx_style', style);
+          if (shadows) localStorage.setItem('nx_gfx_shadows', shadows);
+        } catch(e){}
+      }
+
+      window.NXApplySyncedGfx = syncGfxButtons;
+
+      if (window.chrome && window.chrome.webview) {
+        window.chrome.webview.addEventListener('message', function(event) {
+          var data = event.data;
+          if (typeof data === 'string') {
+            try { data = JSON.parse(data); } catch(e){}
+          }
+          if (data && data.event === 'gfx_current_settings') {
+            syncGfxButtons(data.quality, data.fps, data.style, data.shadows, data.package);
+          }
+        });
+      }
+    })();
+  </script>
 </body>
 </html>

@@ -244,24 +244,40 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const btnLogin = document.getElementById('btn-login');
 
-  // Login submission
+  // Login submission (Strict LicenseAuth Verification)
   if (loginForm) {
     loginForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const key = licenseInput.value.trim();
+
       if (!key) {
         showToast('Please enter your license key', 'warn');
+        licenseInput.classList.add('input-error');
+        setTimeout(() => licenseInput.classList.remove('input-error'), 1200);
         return;
       }
 
       if (btnLogin) {
         btnLogin.disabled = true;
         const btnText = btnLogin.querySelector('.btn-core span');
-        if (btnText) btnText.innerText = 'VERIFYING KEY WITH PANEL...';
+        if (btnText) btnText.innerText = 'AUTHENTICATING...';
       }
 
-      logTerminal(`Verifying license session (Key: ${key})...`, 'info', '[AUTH]');
+      logTerminal(`Verifying license with authentication server...`, 'info', '[AUTH]');
       DesktopBridge.send('login_request', { licenseKey: key });
+
+      // If running outside WebView2 (browser preview), notify user
+      if (!window.chrome?.webview) {
+        setTimeout(() => {
+          if (btnLogin) {
+            btnLogin.disabled = false;
+            const btnText = btnLogin.querySelector('.btn-core span');
+            if (btnText) btnText.innerText = 'ENTER DASHBOARD';
+          }
+          logTerminal('Desktop bridge offline. Please launch via OpenGL Test.exe to authenticate.', 'warn', '[AUTH]');
+          showToast('Desktop bridge required for license authentication', 'warn');
+        }, 1200);
+      }
     });
   }
 
@@ -278,14 +294,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (btnLogin) {
           btnLogin.disabled = false;
           const btnText = btnLogin.querySelector('.btn-core span');
-          if (btnText) btnText.innerText = 'ENTER TRAIL DASHBOARD';
+          if (btnText) btnText.innerText = 'ENTER DASHBOARD';
         }
 
         if (data.success) {
           const verifiedKey = data.key || licenseInput.value.trim();
           displayKey.innerText = verifiedKey;
           logTerminal(`Authentication successful! Session granted.`, 'success', '[AUTH]');
-          showToast(data.message || 'Welcome to NX OpenGL Trail Session', 'success');
+          showToast(data.message || 'Welcome to NX OpenGL Pro Session', 'success');
 
           // Start active countdown timer with real key duration from panel
           startLicenseTimer(data.expiry, data.timeleft, data.subscription);
@@ -388,6 +404,74 @@ document.addEventListener('DOMContentLoaded', () => {
           isOpenGLRunning = false;
           isVTFixing = false;
         }
+      } else if (data.event === 'gfx_log') {
+        appendShellLog(data.message || '', data.type === 'warn' ? '[WARN] >' : (data.type === 'sys' ? '[SYS] >' : '[ENGINE] >'));
+        logTerminal(data.message || '', data.type || 'info', '[GFX]');
+      } else if (data.event === 'gfx_status') {
+        const isConn = !!data.connected;
+        const statusTxt = data.status || (isConn ? 'Connected' : 'Standby');
+        const activePkg = data.package || '';
+
+        isGameLoopConnected = isConn;
+        if (btnConnectGL) {
+          btnConnectGL.classList.toggle('connected', isConn);
+          btnConnectGL.style.opacity = '1';
+        }
+        if (txtConnectGL) {
+          txtConnectGL.innerText = isConn ? 'Disconnect' : 'Start GameLoop';
+        }
+        if (sysStatusText) {
+          sysStatusText.innerText = statusTxt;
+          sysStatusText.style.color = isConn ? '#00ffaa' : 'var(--cyan-primary)';
+        }
+        if (activePkg) {
+          const pkgMap = {
+            'com.tencent.ig': 'global',
+            'com.pubg.krmobile': 'korea',
+            'com.vng.pubgmobile': 'vietnam',
+            'com.rekoo.pubgm': 'taiwan',
+            'com.pubg.imobile': 'india'
+          };
+          const targetVal = pkgMap[activePkg];
+          if (targetVal) {
+            const grp = document.getElementById('grp-game-version');
+            if (grp) {
+              const b = grp.querySelector(`.option-btn[data-val="${targetVal}"]`);
+              if (b) {
+                grp.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('selected'));
+                b.classList.add('selected');
+              }
+            }
+          }
+        }
+      } else if (data.event === 'gfx_current_settings') {
+        if (window.NXApplySyncedGfx) {
+          window.NXApplySyncedGfx(data.quality, data.fps, data.style, data.shadows, data.package);
+        }
+      } else if (data.event === 'gfx_task_complete') {
+        const isSuccess = !!data.success;
+        const msg = data.message || (isSuccess ? 'GFX applied successfully!' : 'GFX application failed.');
+        appendShellLog(isSuccess ? `✔ ${msg}` : `✖ ${msg}`);
+        showToast(msg, isSuccess ? 'success' : 'warn');
+        if (btnApplyGFX) {
+          btnApplyGFX.disabled = false;
+          btnApplyGFX.style.opacity = '1';
+        }
+      } else if (data.event === 'emulator_killed') {
+        isGameLoopConnected = false;
+        if (btnConnectGL) {
+          btnConnectGL.classList.remove('connected');
+          btnConnectGL.style.opacity = '1';
+        }
+        if (txtConnectGL) txtConnectGL.innerText = 'Start GameLoop';
+        if (sysStatusText) {
+          sysStatusText.innerText = 'Standby';
+          sysStatusText.style.color = 'var(--cyan-primary)';
+        }
+        if (btnKillEmulator) {
+          btnKillEmulator.disabled = false;
+        }
+        showToast('All emulator processes terminated', 'warn');
       }
     });
   }
@@ -406,7 +490,7 @@ document.addEventListener('DOMContentLoaded', () => {
       dashboardView.classList.remove('active');
       setTimeout(() => {
         loginView.classList.add('active');
-        showToast('Logged out of Trail session', 'info');
+        showToast('Logged out of Pro session', 'info');
       }, 150);
     });
   }
@@ -456,6 +540,266 @@ document.addEventListener('DOMContentLoaded', () => {
       DesktopBridge.send('fix_vt', { status: 'starting' });
     });
   }
+
+  // ------------------------------------------
+  // 1. SIDEBAR NAVIGATION TABS SWITCHING
+  // ------------------------------------------
+  const navItems = document.querySelectorAll('.nav-item');
+  const tabPanes = document.querySelectorAll('.tab-pane');
+
+  navItems.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetTab = btn.getAttribute('data-tab');
+      if (!targetTab) return;
+
+      navItems.forEach(n => n.classList.remove('active'));
+      btn.classList.add('active');
+
+      tabPanes.forEach(pane => {
+        if (pane.id === `tab-pane-${targetTab}`) {
+          pane.classList.add('active');
+        } else {
+          pane.classList.remove('active');
+        }
+      });
+    });
+  });
+
+  // ------------------------------------------
+  // 2. GFX ACTIVITY SHELL LOGGING
+  // ------------------------------------------
+  function appendShellLog(msg, prefix = '[SYS] >') {
+    const shellLog = document.getElementById('shell-log');
+    if (!shellLog) return;
+    const time = new Date().toTimeString().split(' ')[0];
+    const entry = document.createElement('div');
+    entry.className = 'log-entry';
+    entry.innerHTML = `<span class="log-prefix">${prefix}</span> <span class="log-txt">[${time}] ${msg}</span>`;
+    shellLog.appendChild(entry);
+    shellLog.scrollTop = shellLog.scrollHeight;
+  }
+
+  // ------------------------------------------
+  // 3. GFX OPTION BUTTON GROUPS
+  // ------------------------------------------
+  const optionButtons = document.querySelectorAll('.option-btn');
+  optionButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const parentGroup = btn.closest('.btn-group');
+      if (!parentGroup) return;
+
+      // Deselect sibling buttons in same group
+      parentGroup.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+      // Select clicked button
+      btn.classList.add('selected');
+
+      const grpId = parentGroup.id;
+      const val = btn.getAttribute('data-val');
+      const label = btn.innerText.replace(/BETA/g, '').trim();
+
+      // Remember preferences
+      if (grpId === 'grp-game-version') localStorage.setItem('nx_gfx_version', val);
+      if (grpId === 'grp-gfx-quality') localStorage.setItem('nx_gfx_quality', val);
+      if (grpId === 'grp-fps') localStorage.setItem('nx_gfx_fps', val);
+      if (grpId === 'grp-style') localStorage.setItem('nx_gfx_style', val);
+      if (grpId === 'grp-shadows') localStorage.setItem('nx_gfx_shadows', val);
+
+      appendShellLog(`Selected: ${label}`);
+    });
+  });
+
+  // Restore saved GFX settings from localStorage if available
+  try {
+    const savedVersion = localStorage.getItem('nx_gfx_version');
+    const savedQuality = localStorage.getItem('nx_gfx_quality');
+    const savedFps = localStorage.getItem('nx_gfx_fps');
+    const savedStyle = localStorage.getItem('nx_gfx_style');
+    const savedShadows = localStorage.getItem('nx_gfx_shadows');
+
+    const restoreGroup = (groupId, savedVal) => {
+      if (!savedVal) return;
+      const grp = document.getElementById(groupId);
+      if (!grp) return;
+      const targetBtn = grp.querySelector(`.option-btn[data-val="${savedVal}"]`);
+      if (targetBtn) {
+        grp.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+        targetBtn.classList.add('selected');
+      }
+    };
+
+    restoreGroup('grp-game-version', savedVersion);
+    restoreGroup('grp-gfx-quality', savedQuality);
+    restoreGroup('grp-fps', savedFps);
+    restoreGroup('grp-style', savedStyle);
+    restoreGroup('grp-shadows', savedShadows);
+  } catch (err) {}
+
+  // ------------------------------------------
+  // 4. GAMELOOP GFX ACTIONS (START, APPLY, KILL)
+  // ------------------------------------------
+  let isGameLoopConnected = false;
+  const btnConnectGL = document.getElementById('btn-connect-gameloop');
+  const txtConnectGL = document.getElementById('txt-connect-gl');
+  const sysStatusText = document.getElementById('sys-status-text');
+  const btnApplyGFX = document.getElementById('btn-apply-gfx');
+  const btnKillEmulator = document.getElementById('btn-kill-emulator');
+  const hasNativeBridge = !!window.chrome?.webview;
+
+  // Global Bridge Adapter for direct C++ ExecuteScript callbacks
+  window.NXUpdateState = {
+    setConnected: function(connected, statusText, activePkg) {
+      isGameLoopConnected = !!connected;
+      if (btnConnectGL) {
+        btnConnectGL.classList.toggle('connected', isGameLoopConnected);
+        btnConnectGL.style.opacity = '1';
+      }
+      if (txtConnectGL) {
+        txtConnectGL.innerText = isGameLoopConnected ? 'Disconnect' : 'Start GameLoop';
+      }
+      if (sysStatusText) {
+        sysStatusText.innerText = statusText || (isGameLoopConnected ? 'Connected' : 'Standby');
+        sysStatusText.style.color = isGameLoopConnected ? '#00ffaa' : 'var(--cyan-primary)';
+      }
+    },
+    addLogEntry: function(logText) {
+      appendShellLog(logText);
+    },
+    onTaskComplete: function(msg, isSuccess) {
+      if (btnApplyGFX) {
+        btnApplyGFX.disabled = false;
+        btnApplyGFX.style.opacity = '1';
+      }
+      showToast(msg, isSuccess ? 'success' : 'warn');
+    }
+  };
+
+  // Connect / Start GameLoop
+  if (btnConnectGL) {
+    btnConnectGL.addEventListener('click', () => {
+      if (!isGameLoopConnected) {
+        if (txtConnectGL) txtConnectGL.innerText = 'Connecting...';
+        btnConnectGL.style.opacity = '0.7';
+        appendShellLog('Searching for GameLoop and hooking AOW render context...');
+        logTerminal('Searching for GameLoop process & hooking...', 'accent', '[GFX]');
+        DesktopBridge.send('connect_request', { target: 'gameloop' });
+
+        // Fallback simulation only if running in standalone browser without C++ backend
+        if (!hasNativeBridge) {
+          setTimeout(() => {
+            isGameLoopConnected = true;
+            btnConnectGL.style.opacity = '1';
+            btnConnectGL.classList.add('connected');
+            if (txtConnectGL) txtConnectGL.innerText = 'Disconnect';
+            if (sysStatusText) {
+              sysStatusText.innerText = 'Connected (Hooked)';
+              sysStatusText.style.color = '#00ffaa';
+            }
+            appendShellLog('✔ GameLoop process connected successfully. Ready to Apply GFX.');
+            logTerminal('GameLoop process connected successfully.', 'success', '[GFX]');
+            showToast('GameLoop Connected', 'success');
+          }, 900);
+        }
+      } else {
+        DesktopBridge.send('disconnect_request', {});
+        if (!hasNativeBridge) {
+          isGameLoopConnected = false;
+          btnConnectGL.classList.remove('connected');
+          btnConnectGL.style.opacity = '1';
+          if (txtConnectGL) txtConnectGL.innerText = 'Start GameLoop';
+          if (sysStatusText) {
+            sysStatusText.innerText = 'Standby';
+            sysStatusText.style.color = 'var(--cyan-primary)';
+          }
+          appendShellLog('GameLoop session disconnected.');
+          logTerminal('GameLoop session disconnected.', 'info', '[GFX]');
+          showToast('GameLoop Disconnected', 'info');
+        }
+      }
+    });
+  }
+
+  // Apply GFX
+  if (btnApplyGFX) {
+    btnApplyGFX.addEventListener('click', () => {
+      const selVersion = document.querySelector('#grp-game-version .option-btn.selected')?.dataset.val || 'global';
+      const selQuality = document.querySelector('#grp-gfx-quality .option-btn.selected')?.dataset.val || 'smooth';
+      const selFPS = document.querySelector('#grp-fps .option-btn.selected')?.dataset.val || '120';
+      const selStyle = document.querySelector('#grp-style .option-btn.selected')?.dataset.val || 'classic';
+      const selShadows = document.querySelector('#grp-shadows .option-btn.selected')?.dataset.val || 'disable';
+
+      const config = {
+        version: selVersion,
+        quality: selQuality,
+        fps: parseInt(selFPS, 10) || 120,
+        style: selStyle,
+        shadows: selShadows
+      };
+
+      appendShellLog(`Applying GFX Profile: [${selVersion.toUpperCase()}] ${selQuality.toUpperCase()} @ ${selFPS}FPS | ${selStyle} | Shadows: ${selShadows}`);
+      logTerminal(`Applying GFX profile: ${selVersion.toUpperCase()} ${selQuality.toUpperCase()} ${selFPS}FPS`, 'info', '[GFX]');
+      
+      btnApplyGFX.disabled = true;
+      btnApplyGFX.style.opacity = '0.7';
+
+      DesktopBridge.send('apply_gfx', config);
+
+      // Fallback simulation only if running in standalone browser without C++ backend
+      if (!hasNativeBridge) {
+        setTimeout(() => {
+          appendShellLog('Overwriting UserCustom.ini & shadow render pipeline...');
+        }, 350);
+
+        setTimeout(() => {
+          appendShellLog('Unlocking frame rates: 120 FPS profile active.');
+        }, 750);
+
+        setTimeout(() => {
+          btnApplyGFX.disabled = false;
+          btnApplyGFX.style.opacity = '1';
+          appendShellLog('✔ GFX settings applied successfully.');
+          logTerminal('GFX settings applied successfully.', 'success', '[GFX]');
+          showToast('GFX Settings Applied!', 'success');
+        }, 1200);
+      }
+    });
+  }
+
+  // Kill Emulator
+  if (btnKillEmulator) {
+    btnKillEmulator.addEventListener('click', () => {
+      appendShellLog('Terminating emulator processes (AndroidEmulator.exe, aow_exe.exe)...');
+      logTerminal('Terminating GameLoop emulator processes...', 'warn', '[SYS]');
+      
+      if (sysStatusText) {
+        sysStatusText.innerText = 'Terminating...';
+        sysStatusText.style.color = '#ff3366';
+      }
+
+      btnKillEmulator.disabled = true;
+      DesktopBridge.send('kill_emulator', {});
+
+      // Fallback simulation only if running in standalone browser without C++ backend
+      if (!hasNativeBridge) {
+        setTimeout(() => {
+          btnKillEmulator.disabled = false;
+          isGameLoopConnected = false;
+          if (btnConnectGL) {
+            btnConnectGL.classList.remove('connected');
+            btnConnectGL.style.opacity = '1';
+          }
+          if (txtConnectGL) txtConnectGL.innerText = 'Start GameLoop';
+          if (sysStatusText) {
+            sysStatusText.innerText = 'Standby';
+            sysStatusText.style.color = 'var(--cyan-primary)';
+          }
+          appendShellLog('✔ All emulator processes terminated cleanly.');
+          logTerminal('All emulator instances halted.', 'sys', '[SYS]');
+          showToast('Emulator Killed', 'warn');
+        }, 800);
+      }
+    });
+  }
+
 
   // Clear Terminal
   if (btnClearLog) {
